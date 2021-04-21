@@ -1,6 +1,9 @@
 package rainlox;
 
 import java.util.Scanner;
+
+import rainlox.missions.Generator;
+
 import java.lang.Thread;
 
 public class App {
@@ -23,6 +26,9 @@ public class App {
 				case "help":
 					help();
 					break;
+				case "missions":
+					missions();
+					break;
 				case "\n":
 					System.out.println("Wrong command");
 					break;
@@ -42,6 +48,11 @@ public class App {
 
 		thread0.start();
 
+	}
+
+	private static void missions() {
+		Generator generator = new Generator();
+		generator.getMissions();
 	}
 
 	private static void help() {
