@@ -1,1 +1,0 @@
-java -jar cosmodrom-1.0-SNAPSHOT.jar
