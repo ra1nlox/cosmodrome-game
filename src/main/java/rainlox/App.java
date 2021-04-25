@@ -4,21 +4,27 @@ import java.util.Scanner;
 
 import rainlox.missions.Generator;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.lang.Thread;
 
 public class App {
 
 	private static Thread thread0;
-	private static String temp;
+	private static String answ;
+	private static String wrongCommand = ">> Wrong command";
+	private static Generator generator;
 
 	public static void main(String[] args) {
+		generator = new Generator();
+		helloMsg();
 		Scanner in = new Scanner(System.in);
 		thread0 = new Thread(() -> {
 			while (true) {
 				System.out.print("> ");
-				temp = in.next();
+				answ = in.next();
 
-				switch (temp) {
+				switch (answ) {
 				case "exit":
 					exit();
 					in.close();
@@ -30,10 +36,10 @@ public class App {
 					missions();
 					break;
 				case "\n":
-					System.out.println("Wrong command");
+					System.out.println(wrongCommand);
 					break;
 				default:
-					System.out.println("Wrong command");
+					System.out.println(wrongCommand);
 					break;
 				}
 			}
@@ -51,16 +57,24 @@ public class App {
 	}
 
 	private static void missions() {
-		Generator generator = new Generator();
 		generator.getMissions();
 	}
 
 	private static void help() {
-		System.out.println(
-				"Приветствую вас!\nЭто консольная игра Cosmodrom сделаная 2 людьми на чистом энтузиазме.\nНа данный момент есть несколько команд:\nhelp - вызовет этот текст\nexit - Выход из игры (возможно появится ошибка но это так и задуманно)\nИгра на ранней стадии разработки, так как один из ее разработчико немножко ленивый.");
+		System.out.println(">> На данный момент есть несколько команд:\n"
+				+ "help - Вызовет этот текст                            \n"
+				+ "exit - Выход из игры (возможно появится ошибка но это так и задуманно)\n"
+				+ "missions - Покажет список мисиий а также их цель, порядковый номер и награду (Моры - валюта, SP - очки исследований)\n"
+				+ "Игра на ранней стадии разработки, так как один из ее разработчико немножко ленивый.");
 	}
 
 	private static void exit() {
 		thread0.interrupt();
 	}
+
+	private static void helloMsg() {
+		System.out.println(">> Приветствую вас! Это консольная игра Cosmodrom сделаная 2 людьми на чистом энтузиазме.\n"
+				+ ">> Что бы получить список команд напишите 'help'");
+	}
+
 }

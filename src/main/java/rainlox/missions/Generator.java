@@ -7,15 +7,18 @@ import rainlox.data_types.Mission;
 import rainlox.seed.Seed;
 
 public class Generator {
-	Mission mission;
-	Seed seed;
-	ArrayList<Mission> missions = new ArrayList<>();
+	private Seed seed;
+	private ArrayList<Mission> missions = new ArrayList<>();
 
 	public final String[] DEFAULT_TARGETS = new String[] { "Deploy satellite", "Land rocket", "Launch rocket",
 			"Get scientific data", "Land on Mars" };
 
 	public Generator() {
 		seed = new Seed();
+	}
+
+	public void getMissions() {
+		Generator generator = new Generator();
 
 		Mission mission1 = new Mission(DEFAULT_TARGETS[0], 1, new int[] { rndMor(), rndSP() });
 		Mission mission2 = new Mission(DEFAULT_TARGETS[1], 2, new int[] { rndMor(), rndSP() });
@@ -28,6 +31,10 @@ public class Generator {
 		missions.add(mission3);
 		missions.add(mission4);
 		missions.add(mission5);
+
+		for (int i = 0; i < 5; i++) {
+			System.out.println(missions.get(i).getProperties());
+		}
 	}
 
 	private int rndMor() {
@@ -54,10 +61,4 @@ public class Generator {
 		}
 	}
 
-	public void getMissions() {
-		Generator generator = new Generator();
-		for (int i = 0; i < 5; i++) {
-			System.out.println(generator.missions.get(i).getProperties());
-		}
-	}
 }
